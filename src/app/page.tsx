@@ -1,7 +1,10 @@
+"use client";
+
+import { Card } from "@atoms";
 export default function Home() {
   return (
     <main>
-      <div>Essa é a main</div>
+      <Card />
     </main>
   );
 }
