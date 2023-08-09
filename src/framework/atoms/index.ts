@@ -1,1 +1,1 @@
-export * from "./Card/Card.atom";
+export * from "./CardBase/CardBase.atom";

@@ -1,10 +1,11 @@
 "use client";
 
-import { Card } from "@atoms";
+import { MemoryCard } from "@organisms";
+
 export default function Home() {
   return (
     <main>
-      <Card />
+      <MemoryCard />
     </main>
   );
 }

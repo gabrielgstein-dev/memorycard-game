@@ -21,7 +21,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@atoms": ["./src/framework/atoms"]
+      "@atoms": ["./src/framework/atoms"],
+      "@molecules": ["./src/framework/molecules"],
+      "@organisms": ["./src/framework/organisms"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
