@@ -1,11 +1,12 @@
 "use client";
 
-import { MemoryCard } from "@organisms";
-
+import { BoardGame } from "@/framework/organisms";
+import { useDealer } from "@hooks";
 export default function Home() {
+  const { dealtCards } = useDealer();
   return (
     <main>
-      <MemoryCard />
+      <BoardGame>{dealtCards}</BoardGame>
     </main>
   );
 }

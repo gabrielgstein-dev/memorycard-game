@@ -8,9 +8,17 @@ export const ContainerButton = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
+
+  &[disabled] {
+    visibility: hidden;
+    cursor: default;
+  }
 `;
 
-export const MemoryCardContainer = styled.div<{ isFlipped: boolean }>`
+export const MemoryCardContainer = styled.div<{
+  isFlipped: boolean;
+  hasFounded: boolean;
+}>`
   perspective: 1000px;
   width: 200px;
   height: 300px;

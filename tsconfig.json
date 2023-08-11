@@ -23,7 +23,9 @@
       "@/*": ["./src/*"],
       "@atoms": ["./src/framework/atoms"],
       "@molecules": ["./src/framework/molecules"],
-      "@organisms": ["./src/framework/organisms"]
+      "@organisms": ["./src/framework/organisms"],
+      "@utils": ["./src/utils"],
+      "@hooks": ["./src/hooks"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -4,14 +4,28 @@ import { FrontCard, BackCard } from "@molecules";
 
 import * as S from "./MemoryCard.style";
 
-export const MemoryCard: React.FC = () => {
-  const [isFlipped, setIsFlipped] = React.useState(false);
+export interface MemoryCardProps {
+  cardId: string;
+  chooseCard: (cardId: string) => void;
+  hasChoosed?: boolean;
+  hasFounded?: boolean;
+}
+
+export const MemoryCard: React.FC<MemoryCardProps> = ({
+  cardId,
+  chooseCard,
+  hasChoosed,
+  hasFounded,
+}) => {
+  const handleClick = () => {
+    !hasFounded && chooseCard?.(cardId);
+  };
 
   return (
-    <S.ContainerButton onClick={() => setIsFlipped(!isFlipped)}>
-      <S.MemoryCardContainer isFlipped={isFlipped}>
+    <S.ContainerButton onClick={handleClick} disabled={!!hasFounded}>
+      <S.MemoryCardContainer isFlipped={!!hasChoosed} hasFounded={!!hasFounded}>
         <BackCard />
-        <FrontCard />
+        <FrontCard cardId={cardId} />
       </S.MemoryCardContainer>
     </S.ContainerButton>
   );
