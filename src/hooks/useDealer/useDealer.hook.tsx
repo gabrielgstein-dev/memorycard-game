@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 import { shuffle } from "@utils";
-import { MemoryCard } from "@/framework/organisms";
+import { MemoryCard } from "@organisms";
 import {
   checkPair,
   flipTargetCard,
   generateInitialData,
 } from "./useDealer.utils";
-import { CardData } from "./useDealer.types";
+import { CardData } from "@types";
 
 export function useDealer() {
   const [cardsData, setCardsData] = useState<CardData[]>([]);
-  const [selectedCards, setSelectedCards] = useState<string[]>([]);
+  const [selectedCards, setSelectedCards] = useState<CardData[]>([]);
 
   useEffect(() => {
     const initialData = shuffle(generateInitialData());
@@ -26,24 +26,24 @@ export function useDealer() {
     }
   }, [selectedCards]);
 
-  const flipCard = (cardId: string) => {
+  const flipCard = (card: CardData) => {
     if (selectedCards.length === 2) {
       return;
     }
-    setCardsData((prevData) => {
-      return prevData.map((cardData) => flipTargetCard(cardData, cardId));
-    });
-    setSelectedCards([...selectedCards, cardId]);
+
+    setCardsData(flipTargetCard(cardsData, card));
+    setSelectedCards([...selectedCards, card]);
   };
 
   const dealtCards = cardsData.map((cardData) => {
     return (
       <MemoryCard
-        key={cardData.cardId}
-        cardId={cardData.cardId}
-        hasChoosed={cardData.isFlipped}
+        key={`${cardData.id}:${cardData.type}`}
+        id={cardData.id}
+        isFlipped={cardData.isFlipped}
+        isMatched={cardData.isMatched}
+        type={cardData.type}
         chooseCard={flipCard}
-        hasFounded={cardData.founded}
       />
     );
   });

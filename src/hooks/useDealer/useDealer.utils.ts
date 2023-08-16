@@ -1,20 +1,29 @@
-import { CardData } from "./useDealer.types";
+import { CardData } from "@types";
 
 export const generateInitialData = () => {
-  const cards = Array.from({ length: 2 }, (_, index) => ({
-    cardId: `${index}:A`,
+  const cards: CardData[] = Array.from({ length: 2 }, (_, index) => ({
+    id: index,
+    type: "A",
     isFlipped: false,
-    founded: false,
+    isMatched: false,
   }));
 
-  return [
-    ...cards,
-    ...cards.map((card, index) => ({ ...card, cardId: `${index}:B` })),
+  const pairCards: CardData[] = [
+    ...cards.map((card) => ({
+      ...card,
+      type: "B" as CardData["type"],
+    })),
   ];
+
+  return [...cards, ...pairCards];
+};
+
+const areCardsAPair = (card1: CardData, card2: CardData): boolean => {
+  return card1.id === card2.id && card1.type !== card2.type;
 };
 
 const resetSelectedCards = (
-  setSelectedCards: React.Dispatch<React.SetStateAction<string[]>>,
+  setSelectedCards: React.Dispatch<React.SetStateAction<CardData[]>>,
   setCardsData: React.Dispatch<React.SetStateAction<CardData[]>>
 ) => {
   setSelectedCards([]);
@@ -26,35 +35,32 @@ const resetSelectedCards = (
 };
 
 export const checkPair = (
-  selectedCards: string[],
-  setSelectedCards: React.Dispatch<React.SetStateAction<string[]>>,
+  selectedCards: CardData[],
+  setSelectedCards: React.Dispatch<React.SetStateAction<CardData[]>>,
   setCardsData: React.Dispatch<React.SetStateAction<CardData[]>>
 ) => {
   const [firstCard, secondCard] = selectedCards;
 
-  if (firstCard && secondCard) {
-    const [firstId, firstTag] = firstCard.split(":");
-    const [secondId, secondTag] = secondCard.split(":");
+  if (areCardsAPair(firstCard, secondCard)) {
+    setCardsData((prevData) =>
+      prevData.map((card) =>
+        card.id === firstCard.id || card.id === secondCard.id
+          ? ({ ...card, isMatched: true } as CardData)
+          : card
+      )
+    );
 
-    if (firstId === secondId && firstTag !== secondTag) {
-      setCardsData((prevData) =>
-        prevData.map((card) =>
-          card.cardId === firstCard || card.cardId === secondCard
-            ? { ...card, founded: true }
-            : card
-        )
-      );
-
-      resetSelectedCards(setSelectedCards, setCardsData);
-    } else {
-      resetSelectedCards(setSelectedCards, setCardsData);
-    }
+    resetSelectedCards(setSelectedCards, setCardsData);
+  } else {
+    resetSelectedCards(setSelectedCards, setCardsData);
   }
 };
 
-export const flipTargetCard = (card: CardData, cardId: string) => {
-  if (card.cardId === cardId) {
-    return { ...card, isFlipped: !card.isFlipped };
-  }
-  return card;
+export const flipTargetCard = (cardList: CardData[], flipedCard: CardData) => {
+  return cardList.map((card) => {
+    if (card.id === flipedCard.id && card.type === flipedCard.type) {
+      return { ...card, isFlipped: !card.isFlipped };
+    }
+    return card;
+  });
 };
