@@ -26,7 +26,9 @@
       "@organisms": ["./src/framework/organisms"],
       "@utils": ["./src/utils"],
       "@hooks": ["./src/hooks"],
-      "@types": ["./src/types"]
+      "@types": ["./src/types"],
+      "@hocs": ["./src/hocs"],
+      "@store": ["./src/store"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
