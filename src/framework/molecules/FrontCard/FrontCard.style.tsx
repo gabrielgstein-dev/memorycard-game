@@ -12,7 +12,7 @@ export const FrontCardTitle = styled.h4`
   position: absolute;
   width: 122%;
   left: -22px;
-  top: 38%;
+  top: 45%;
   text-align: center;
   background-color: #fff;
   transform: rotatez(-42deg);
@@ -31,7 +31,8 @@ export const FrontCardNumberMirrored = styled.p`
 
   position: absolute;
   padding: 5px;
-  right: 0;
+  right: 15px;
+  bottom: 15px;
 `;
 
 export const FrontCardImage = styled.img`

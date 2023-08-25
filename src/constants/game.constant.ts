@@ -1,0 +1,4 @@
+export enum GameplayEnum {
+  SINGLEPLAYER = "SINGLEPLAYER",
+  MULTIPLAYER = "MULTIPLAYER",
+}

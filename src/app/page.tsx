@@ -1,12 +1,9 @@
 "use client";
-
-import { BoardGame } from "@/framework/organisms";
-import { useDealer } from "@hooks";
+import { ChooseBox } from "@molecules";
 export default function Home() {
-  const { dealtCards } = useDealer();
   return (
     <main>
-      <BoardGame>{dealtCards}</BoardGame>
+      <ChooseBox />
     </main>
   );
 }
