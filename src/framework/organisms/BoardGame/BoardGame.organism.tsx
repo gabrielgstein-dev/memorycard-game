@@ -1,7 +1,12 @@
 "use client";
 
 import React, { PropsWithChildren } from "react";
-
-export const BoardGame = ({ children }: PropsWithChildren) => {
+interface BoardGameProps {
+  roomHash?: string;
+}
+export const BoardGame = ({
+  children,
+  roomHash,
+}: PropsWithChildren<BoardGameProps>) => {
   return <div>{children}</div>;
 };

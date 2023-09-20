@@ -1,12 +1,10 @@
 "use client";
 
 import { MultiplayerBoardGame } from "@/framework/organisms";
-import { useDealer } from "@hooks";
-export default function Home() {
-  const { dealtCards } = useDealer();
+export default function MultiBoard() {
   return (
     <main>
-      <MultiplayerBoardGame>{dealtCards}</MultiplayerBoardGame>
+      <MultiplayerBoardGame />
     </main>
   );
 }

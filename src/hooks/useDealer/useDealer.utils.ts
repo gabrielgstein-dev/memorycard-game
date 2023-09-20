@@ -1,23 +1,5 @@
 import { CardData } from "@types";
 
-export const generateInitialData = () => {
-  const cards: CardData[] = Array.from({ length: 2 }, (_, index) => ({
-    id: index,
-    type: "A",
-    isFlipped: false,
-    isMatched: false,
-  }));
-
-  const pairCards: CardData[] = [
-    ...cards.map((card) => ({
-      ...card,
-      type: "B" as CardData["type"],
-    })),
-  ];
-
-  return [...cards, ...pairCards];
-};
-
 const areCardsAPair = (card1: CardData, card2: CardData): boolean => {
   return card1.id === card2.id && card1.type !== card2.type;
 };
@@ -38,7 +20,7 @@ export const checkPair = (
   selectedCards: CardData[],
   setSelectedCards: React.Dispatch<React.SetStateAction<CardData[]>>,
   setCardsData: React.Dispatch<React.SetStateAction<CardData[]>>
-) => {
+): boolean => {
   const [firstCard, secondCard] = selectedCards;
 
   if (areCardsAPair(firstCard, secondCard)) {
@@ -49,10 +31,11 @@ export const checkPair = (
           : card
       )
     );
-
     resetSelectedCards(setSelectedCards, setCardsData);
+    return true;
   } else {
     resetSelectedCards(setSelectedCards, setCardsData);
+    return false;
   }
 };
 

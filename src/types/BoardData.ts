@@ -1,0 +1,3 @@
+interface BoardData {
+  boardId: string;
+}
